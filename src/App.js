@@ -51,7 +51,6 @@ const App = () => {
 
   const createPetal = (index, totalPetals = 16) => {
     const angle = (index * 360) / totalPetals;
-    const delay = index * 0.1;
     
     // Scroll progress'e göre yaprakların görünürlüğü ve boyutu
     const petalProgress = Math.max(0, Math.min(1, (scrollProgress - 0.5) * 2));
@@ -102,7 +101,6 @@ const App = () => {
   };
 
   const createStreamParticle = (index) => {
-    const delay = index * 0.2;
     const side = index % 4;
     let startX, startY, endX, endY;
     
@@ -156,7 +154,7 @@ const App = () => {
           opacity: opacity,
           transform: `scale(${scale})`,
           transition: 'all 0.3s ease-out',
-          animationDelay: `${delay}s`
+          animationDelay: `${index * 0.2}s`
         }}
       />
     );
