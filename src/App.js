@@ -323,7 +323,7 @@ const App = () => {
       <div className="content-sections">
         <div className="content-section">
           <div className="content-inner">
-            <h1 className="main-title">Aşağı Kaydır</h1>
+            <h1 className="main-title">Kaydır bebeğim 💕</h1>
             <p className="main-subtitle">Büyülü dönüşümü izle</p>
             <div className="scroll-indicator">
               <svg className="scroll-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -335,18 +335,18 @@ const App = () => {
         
         <div className="content-section">
           <div className="content-inner">
-            <h2 className="section-title">Parçalar Birleşiyor</h2>
+            <h2 className="section-title">Bu koku nerden geliyor? 🌼</h2>
             <p className="section-text">
-              Her kaydırışınızda, etraftan gelen altın parçacıklar yavaş yavaş bir araya geliyor...
+            Çok tanıdık geliyor 🤔
             </p>
           </div>
         </div>
         
         <div className="content-section">
           <div className="content-inner">
-            <h2 className="section-title">Büyülü Dönüşüm</h2>
+            <h2 className="section-title">Mis gibi kokuyor 💕</h2>
             <p className="section-text">
-              Akışkan hareketler ve zarif animasyonlar eşliğinde, güzel bir papatya şekilleniyor.
+              Bu kokuyu senin gibi bir çiçek veriyor 😍
             </p>
           </div>
         </div>
@@ -354,11 +354,11 @@ const App = () => {
         <div className="content-section">
           <div className="content-inner">
             <h2 className={`final-title ${scrollProgress > 0.9 ? 'completed' : ''}`}>
-              {scrollProgress > 0.9 ? "Tamamlandı!" : "Neredeyse Bitti..."}
+              {scrollProgress > 0.9 ? "Sana özel bir papatya 💕" : "Neredeyse Bitti..."}
             </h2>
             <p className="section-text">
               {scrollProgress > 0.9 
-                ? "Işıltılı papatyanız hazır! Bu zarif çiçek artık size ait." 
+                ? "Seni çok seviyorum bebeğim ❤️‍🔥" 
                 : "Son dokunuşlar yapılıyor, biraz daha kaydırın."
               }
             </p>
