@@ -1,38 +1,422 @@
-.App {
-  text-align: center;
+/* src/App.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+  min-height: 500vh;
+  background: linear-gradient(to bottom, #1e1b4b, #581c87, #be185d);
+  position: relative;
+}
+
+.light-effect {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transform: skewX(-12deg);
   pointer-events: none;
+  transition: left 0.3s ease-out;
+  z-index: 1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.animation-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  overflow: hidden;
+}
+
+.daisy-wrapper {
+  position: relative;
+  width: 320px;
+  height: 320px;
+}
+
+/* Akışkan şeritler */
+.streams-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+}
+
+.stream {
+  background: linear-gradient(to bottom, 
+    rgba(255, 215, 0, 0.8) 0%, 
+    rgba(255, 182, 193, 0.6) 50%, 
+    transparent 100%);
+  transform-origin: bottom center;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+}
+
+/* Parçacıklar */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.particle {
+  border-radius: 50%;
+  background: radial-gradient(circle, 
+    rgba(255, 215, 0, 0.8) 0%, 
+    rgba(255, 165, 0, 0.6) 70%, 
+    transparent 100%);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Papatya merkezi */
+.daisy-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  margin-left: -26px;
+  margin-top: -26px;
+  z-index: 20;
+  background: radial-gradient(circle, 
+    rgba(255, 215, 0, 1) 0%, 
+    rgba(255, 193, 7, 1) 70%, 
+    rgba(255, 152, 0, 1) 100%);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  animation: glow 2s ease-in-out infinite;
+}
+
+.daisy-center.glowing {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  animation: glow 2s ease-in-out infinite;
+}
+
+.center-detail-1 {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fde047, #fb923c);
+  opacity: 0.8;
+}
+
+.center-detail-2 {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: linear-gradient(-45deg, #fef3c7, #fde047);
+  opacity: 0.6;
+}
+
+/* Papatya yaprakları */
+.petals-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -1px;
+  margin-top: -1px;
+  width: 200px;
+  height: 200px;
+}
+
+.petal {
+  position: absolute;
+  transform-origin: center bottom;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.petal-shape {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(255, 182, 193, 0.9) 0%, 
+    rgba(255, 105, 180, 0.8) 50%, 
+    rgba(219, 112, 147, 0.9) 100%);
+  box-shadow: 0 4px 20px rgba(255, 182, 193, 0.4);
+  /* Yaprak şeklini düzeltiyorum */
+  /*border-radius: 32px 32px 0 0;*/
+  border-radius: 50%;
+  transform: rotate(-95deg);
+}
+
+/* Yaprak animasyonlarını kaldırıyorum - JavaScript'te kontrol edilecek */
+
+/* İlerleme çubuğu */
+.progress-container {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.progress-bar {
+  width: 128px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #fbbf24, #ec4899);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/* İçerik bölümleri */
+.content-sections {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.5));
+}
+
+.content-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-inner {
+  text-align: center;
   color: white;
+  max-width: 600px;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.main-title {
+  font-size: 6rem;
+  font-weight: 100;
+  margin-bottom: 16px;
+  letter-spacing: 0.1em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.main-subtitle {
+  font-size: 1.25rem;
+  opacity: 0.7;
+}
+
+.scroll-indicator {
+  margin-top: 32px;
+  animation: bounce 2s infinite;
+}
+
+.scroll-arrow {
+  width: 32px;
+  height: 32px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+
+.section-text {
+  font-size: 1.125rem;
+  opacity: 0.8;
+  line-height: 1.8;
+}
+
+.final-title {
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 32px;
+  transition: all 0.5s ease;
+}
+
+.final-title.completed {
+  background: linear-gradient(to right, #fde047, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+.completion-icon {
+  margin-top: 32px;
+  animation: pulse 2s infinite;
+}
+
+.completion-icon span {
+  font-size: 2rem;
+}
+
+/* Animasyonlar */
+@keyframes sparkle {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
   }
-  to {
-    transform: rotate(360deg);
+  50% { 
+    transform: scale(1.2) rotate(180deg);
+    filter: brightness(1.5);
+  }
+}
+
+@keyframes float-petal {
+  0%, 100% { 
+    transform: translateY(-60px) rotateZ(2deg);
+  }
+  50% { 
+    transform: translateY(-65px) rotateZ(-2deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 182, 193, 0.2), 0 0 60px rgba(255, 105, 180, 0.1);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 182, 193, 0.3), 0 0 90px rgba(255, 105, 180, 0.2);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -20px, 0);
+  }
+  70% {
+    transform: translate3d(0, -10px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .final-title {
+    font-size: 2rem;
+  }
+  
+  .daisy-wrapper {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .content-inner {
+    padding: 40px 20px;
+  }
+}
+
+.center-image {
+  width: 350px;
+  height: 350px;
+  margin-left: -175px;
+  margin-top: -175px;
+}
+/* Müzik kontrolü için popup */
+
+/* �� MÜZİK POP-UP STİLLERİ 🎵 */
+.music-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /*background: rgba(0, 0, 0, 0.7);*/
+  /*background: linear-gradient(45deg, #1e1b4b 0%, #581c87 50%, #be185d 100%);*/
+  backdrop-filter: blur(85px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+
+}
+
+.music-popup {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.music-popup-btn {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.music-popup-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .music-popup-btn {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+}
+
+/* Bebeğimin resmi */
+
+@media (max-width: 768px) {
+  .center-image {
+    width: 250px;
+    height: 250px;
+    margin-left: -125px;
+    margin-top: -125px;
   }
 }
